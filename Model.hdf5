@@ -1,1 +1,4 @@
-
+// Allow any format from v1.10 up to the latest supported version:
+const f = new h5wasm.File("myfile.h5", "w", { libver: ["v110", "latest"] });
+f.create_dataset({ name: "data", data: new Float32Array([1, 2, 3]) });
+f.close();
