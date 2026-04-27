@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19255851.svg)](https://doi.org/10.5281/zenodo.14624863)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19255851.svg)](https://doi.org/10.5281/zenodo.1462486)
 
 # h5wasm
 a zero-dependency WebAssembly-powered library for [reading](#reading) and [writing](#writing) HDF5 files from javascript
@@ -32,7 +32,7 @@ a zero-dependency WebAssembly-powered library for [reading](#reading) and [writi
 # QuickStart
 
 ## Browser (no-build)
-```js
+```jsx
 import h5wasm from "https://cdn.jsdelivr.net/npm/h5wasm@latest/dist/esm/hdf5_hl.js";
 
 // the WASM loads asychronously, and you can get the module like this:
@@ -57,7 +57,8 @@ let f = new h5wasm.File("sans59510.nxs.ngv", "r");
 
 ## Worker usage
 Since ESM is not supported in all web worker contexts (e.g. Firefox), an additional  ```./dist/iife/h5wasm.js``` is provided in the package for `h5wasm>=0.4.8`; it can be loaded in a worker and used as in the example below (which uses the WORKERFS file system for random access on local files):
-```js
+
+```jsx
 // worker.js
 onmessage = async function(e) {
     const { FS } = await h5wasm.ready;
@@ -87,6 +88,11 @@ let f = new h5wasm.File("test.h5", "w");
 f.create_dataset({name: "text_data", data: ["this", "that"]});
 // ...
 ```
+ - [Browser (no-build)](#browser-no-build)
+  - [Worker usage](#worker-usage)
+  - [Browser target (build system)](#browser-target-build-system)
+  - [Node.js](#nodejs)
+  - 
 __note__: you must configure your build system to target >= ES2020 (for bigint support)
 
 ## nodejs
@@ -99,7 +105,7 @@ node
 
 ```
 
-```js
+```jsx
 const h5wasm = await import("h5wasm/node");
 await h5wasm.ready;
 
@@ -119,7 +125,7 @@ _(all examples are written in ESM - for Typescript some type casting is probably
 
 ## Opening a file
 
-```js
+```jsx
 new h5wasm.File(filename, mode?, options?)
 ```
 
@@ -142,7 +148,7 @@ Available modes:
 | `"Sr"` | SWMR read |
 
 ### Reading
-```js
+```jsx
 let f = new h5wasm.File("sans59510.nxs.ngv", "r");
 
 // list keys:
@@ -223,8 +229,8 @@ data.to_array()
 ```
 
 ### Writing
-```js
-let new_file = new h5wasm.File("myfile.h5", "w");
+```jsx
+let new_file = new h5wasm.File("kubu-hai.model.h5", "w");
 
 new_file.create_group("entry");
 
